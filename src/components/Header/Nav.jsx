@@ -1,6 +1,6 @@
 import Categories from "./Categories"
 import LOGO from "../../assets/logo.png"
-import SEARCH from "../../assets/icons/search.svg"
+import NavSearch from "./NavSearch"
 
 const Nav = () => {
   return (
@@ -68,10 +68,12 @@ const Nav = () => {
                         alt="Lws"
                     />
                 </a>
-                <div className="flex items-center space-x-3 lg:space-x-8">
-                    <img src={SEARCH} />
-                </div>
+
+                            <NavSearch/>
+
+                 
             </div>
+
 
             <Categories/>
          

@@ -1,7 +1,10 @@
 import { useNewsFetch } from "../../context/NewsFetchProvider"
+import { useSearchNewsFetch } from "../../context/SearchNewsFetchProvider"
 
 const NewsList = () => {
     const {news,loading} = useNewsFetch()
+
+    const {searchNews} = useSearchNewsFetch()
 
     
  
@@ -9,18 +12,52 @@ const NewsList = () => {
    
       <div className="container mx-auto grid grid-cols-12 gap-8">
         {
-            loading.status && <div className="text-center text-3xl z-50 bg-black
+            loading.status && <div className="text-center text-3xl z-50 bg-black h-[100%] w-[100%]
 
-            bg-opacity-50 text-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 rounded-md shadow-lg
-            
+             bg-opacity-80 text-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 rounded-md shadow-lg
+              flex items-center justify-center
             
             ">{loading.message}</div>
         }
 
 
+
 {
- 
-    news.articles && news.articles.map((article,index)=>{
+    searchNews.news ? searchNews.news.result.map((article,index)=>{
+
+        return (
+            <div key={index} className="col-span-12 md:col-span-6 lg:col-span-4">
+                <div className="col-span-12 md:col-span-4">
+
+                   <img src={article.urlToImage} alt={article.title}/>
+
+                    
+                    <a href="#"
+                        ><h3
+                            className="mb-2.5 text-xl font-bold lg:text-2xl"
+                        >
+                            {article.title}
+                        </h3></a
+                    >
+                    <p className="text-base text-[#292219]">
+                        {article.description}
+                    </p>
+                    <p className="mt-5 text-base text-[#94908C]">
+                        {new Date(article.publishedAt).toLocaleDateString("en-us",{
+                            day:"numeric",
+                            month:"long",
+                            year:"numeric"
+                        
+                        })}
+                        {/* {article.publishedAt} */}
+                    </p>
+                </div>
+            </div>
+        )
+
+    })
+    :
+      news.articles && news.articles.map((article,index)=>{
         return(
             <div key={index} className="col-span-12 md:col-span-6 lg:col-span-4">
                 <div className="col-span-12 md:col-span-4">
@@ -51,7 +88,12 @@ const NewsList = () => {
             </div>
         )
     })
+    
 }
+
+
+
+
 
                 {/* <div
                     className="col-span-12 grid grid-cols-12 gap-6 self-start xl:col-span-8"
