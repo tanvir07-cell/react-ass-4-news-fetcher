@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 
-const useNewsQuery = (category) => {
+const useNewsQuery = (category,searchQuery) => {
     const [news,setNews] = useState({})
     const [loading,setLoading] = useState({
         status:false,
@@ -8,7 +8,20 @@ const useNewsQuery = (category) => {
     
     })
     const ref = useRef()
-    let url = category ? `http://localhost:8000/v2/top-headlines?category=${category}` : `http://localhost:8000/v2/top-headlines/`
+    let url;
+
+    if(searchQuery){
+         url = `http://localhost:8000/v2/search?q=${searchQuery}`
+    }
+
+    else if(category){
+         url = `http://localhost:8000/v2/top-headlines?category=${category}`}
+
+    else{
+        url = `http://localhost:8000/v2/top-headlines?category`
+    
+    }
+
 
     useEffect(()=>{
 

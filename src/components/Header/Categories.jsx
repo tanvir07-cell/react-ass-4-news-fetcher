@@ -2,7 +2,7 @@ import { useNewsFetch } from "../../context/NewsFetchProvider"
 
 const Categories = () => {
 
-    const {news,loading,category,handleCategory} = useNewsFetch()
+    const {news,category,handleCategory} = useNewsFetch()
   
     
    

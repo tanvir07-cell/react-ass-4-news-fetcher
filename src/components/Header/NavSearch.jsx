@@ -1,15 +1,25 @@
 import { useState } from "react"
 import SEARCH from "../../assets/icons/search.svg"
 import { useSearchNewsFetch } from "../../context/SearchNewsFetchProvider"
+import useDebounce from "../../hooks/useDebounce"
 
 
 const NavSearch = () => {
 
-  const {searchNews,handleSearchNews} = useSearchNewsFetch()
+	const {searchQuery,handleSearchQuery} = useSearchNewsFetch()
 
-  const [search,setSearch] = useState("");
 
-  console.log(searchNews)
+   const debounceChange = useDebounce(()=>{
+
+	handleSearchQuery(searchQuery)
+
+	// after 1000ms get the specific search QueryNews
+	// from api and check it to the console 
+	//   console.log(news)
+
+
+   })
+   
 	
 
   return (
@@ -20,8 +30,9 @@ const NavSearch = () => {
 						<input 
 
 						onChange={(e)=>{
-							setSearch(e.target.value.toLowerCase())
-							handleSearchNews(search)
+                            debounceChange()
+							handleSearchQuery(e.target.value.toLowerCase())
+							
 
 
 

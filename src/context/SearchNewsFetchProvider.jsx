@@ -1,40 +1,26 @@
 import { createContext, useContext, useState } from "react"
+import useNewsQuery from "../hooks/useNewsQuery"
 
 const SearchNewsFetchContext = createContext()
 
 
 const SearchNewsFetchProvider = ({children}) => {
-    const [searchNews,setSearchNews] = useState({})
+   
 
-    const handleSearchNews = async(searchText) => {
-        try{
-             const data = await fetch(`http://localhost:8000/v2/search?q=${searchText}`)
+    const [searchQuery,setSearchQuery] = useState("")
 
-             if(!data.ok){
-                 throw new Error("Error fetching data")
-             }
-
-                const news = await data.json()
-
-            setSearchNews({
-            ...searchNews,
-            news
-        })
+    const handleSearchQuery = (query) => {
+        setSearchQuery(query)
     }
 
-    catch(err){
-        console.error(err)
-    }
-        
-       
-
-
+    const [news,loading] = useNewsQuery("",searchQuery)
 
     
-    }
+
+    
     
   return (
-    <SearchNewsFetchContext.Provider value = {{searchNews,handleSearchNews}}>
+    <SearchNewsFetchContext.Provider value = {{news,loading,searchQuery,handleSearchQuery}}>
       {children}
     </SearchNewsFetchContext.Provider>
   )

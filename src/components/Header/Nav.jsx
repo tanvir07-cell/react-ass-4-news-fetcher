@@ -1,6 +1,7 @@
 import Categories from "./Categories"
 import LOGO from "../../assets/logo.png"
 import NavSearch from "./NavSearch"
+import getDate from "../../utils"
 
 const Nav = () => {
   return (
@@ -59,9 +60,9 @@ const Nav = () => {
                             strokeLinejoin="round"
                         />
                     </svg>
-                    <span>Thursday, February 25, 2021</span>
+                    <span>{getDate()}</span>
                 </div>
-                <a href="/">
+                <a>
                     <img
                         className="max-w-[100px] md:max-w-[165px]"
                         src={LOGO}
@@ -69,7 +70,7 @@ const Nav = () => {
                     />
                 </a>
 
-                            <NavSearch/>
+              <NavSearch/>
 
                  
             </div>
