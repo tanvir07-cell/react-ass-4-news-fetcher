@@ -7,7 +7,6 @@ const NewsList = () => {
     const {news,loading,category} = useNewsFetch()
 
     const {searchQuery} = useSearchNewsFetch()
-    console.log(searchQuery)
 
     const filteredNews = news?.articles?.filter((item)=>{
         return item.title.toLowerCase().includes(searchQuery)
@@ -33,7 +32,7 @@ const NewsList = () => {
         }
        
         <div
-            className="col-span-12 grid grid-cols-12 gap-6 self-start xl:col-span-8 container mx-auto"
+            className="col-span-12 grid grid-cols-12 gap-6 self-start xl:col-span-8 container"
         >
 
             <div className="col-span-12 grid grid-cols-12 gap-4">

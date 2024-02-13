@@ -1,4 +1,3 @@
-import { useState } from "react"
 import SEARCH from "../../assets/icons/search.svg"
 import { useSearchNewsFetch } from "../../context/SearchNewsFetchProvider"
 import useDebounce from "../../hooks/useDebounce"
@@ -11,11 +10,11 @@ const NavSearch = () => {
 
    const debounceChange = useDebounce(()=>{
 
+	// after 1000ms the searchQuery will be updated
+
 	handleSearchQuery(searchQuery)
 
-	// after 1000ms get the specific search QueryNews
-	// from api and check it to the console 
-	//   console.log(news)
+	
 
 
    })
